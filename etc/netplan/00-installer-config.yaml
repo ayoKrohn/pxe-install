@@ -1,0 +1,10 @@
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    enx28ee5202221b: # REPLACE with your PXE interface
+      dhcp4: no
+      addresses:
+        - 192.168.0.150/24
+
+

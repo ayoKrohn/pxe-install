@@ -1,0 +1,108 @@
+#cloud-config
+autoinstall:
+  apt:
+    disable_components: []
+    geoip: true
+    preserve_sources_list: false
+    primary:
+    - arches:
+      - amd64
+      - i386
+      uri: http://archive.ubuntu.com/ubuntu
+    - arches:
+      - default
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  drivers:
+    install: false
+  identity:
+    hostname: example
+    password: $6$JYNGvNmzMjmr0vkY$j8BMHLJ/aUAdQ610jiKMEDP15os99nYkJWldST4FH9G9FssX8.P7.k3fyCVsgavuWaa0pQ0P7Hevvwpoe9IsZ1
+    realname: ayo
+    username: ayo
+  kernel:
+    package: linux-generic
+  keyboard:
+    layout: dk
+    toggle: null
+    variant: ''
+  locale: en_US.UTF-8
+  network:
+    ethernets:
+      eno1:
+        critical: false
+        optional: true
+        dhcp-identifier: mac
+        dhcp4: true
+      enp2s0:
+        dhcp4: true
+        critical: false
+        optional: true
+    version: 2
+  source:
+    id: ubuntu-server-minimal
+    search_drivers: false
+  ssh:
+    allow-pw: true
+    authorized-keys: []
+    install-server: true
+  storage:
+    config:
+    - ptable: gpt
+      path: /dev/nvme0n1
+      wipe: superblock-recursive
+      preserve: false
+      name: ''
+      grub_device: false
+      type: disk
+      id: disk-nvme0n1
+
+    - device: disk-nvme0n1
+      size: 1127219200
+      wipe: superblock
+      flag: boot
+      number: 1
+      preserve: false
+      grub_device: true
+      offset: 1048576
+      type: partition
+      id: partition-0
+
+    - fstype: fat32
+      volume: partition-0
+      preserve: false
+      type: format
+      id: format-0
+
+    - device: disk-nvme0n1
+      size: 498978521088
+      wipe: superblock
+      number: 2
+      preserve: false
+      grub_device: false
+      offset: 1128267776
+      type: partition
+      id: partition-1
+
+    - fstype: ext4
+      volume: partition-1
+      preserve: false
+      type: format
+      id: format-1
+
+    - path: /
+      device: format-1
+      type: mount
+      id: mount-1
+
+    - path: /boot/efi
+      device: format-0
+      type: mount
+      id: mount-0
+
+  updates: security
+
+  late-commands:
+    - curtin in-target -- apt-get update
+    - curtin in-target -- apt-get install -y emacs nano vim
+
+  version: 1

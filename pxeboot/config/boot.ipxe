@@ -1,0 +1,14 @@
+#!ipxe
+
+#UBUNTU SERVER install with AUTOINSTALL
+
+:ubuntu_22.04.5
+
+set base-url http://192.168.0.150/jammy
+
+kernel ${base-url}/boot/vmlinuz initrd=initrd autoinstall url=${base-url}/iso/ubuntu-22.04.5-live-server-amd64.iso ip=dhcp ds=nocloud-net;s=${base-url}/autoinstall/ 
+
+initrd ${base-url}/boot/initrd
+
+boot 
+
