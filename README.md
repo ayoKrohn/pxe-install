@@ -15,24 +15,26 @@ This setup has been tested on host machines running Ubuntu Desktop 22.04 and Ubu
 ## 📁 Project Structure
 
 - `install.sh`  
-  → Main setup script that installs and configures PXE services.
-- `build-ipxe.sh`
-   → Downloads and compiles iPXE firmware with an embedded script pointing to the TFTP-server, and places firmware binaries in `/pxeboot/firmware`.
+   Main setup script that installs and configures PXE services.
+
+- `build-ipxe.sh` 
+   Downloads and compiles iPXE firmware with an embedded script pointing to the TFTP-server, and places firmware binaries in `/pxeboot/firmware`.
 
 - `etc/`  
-  → Configuration files:
-  - `dnsmasq.conf`: PXE DHCP/TFTP server settings    
+   Configuration files:
+  - `dnsmasq.conf`: PXE DHCP/TFTP server settings
   - `netplan/00-installer-config.yaml`: Static network configuration
 
 - `pxeboot/`  
-  → iPXE bootloader files:
-  - `config/boot.ipxe`: iPXE boot script  
+   iPXE bootloader files:
+  - `config/boot.ipxe`: iPXE boot script
   - `firmware/`: Directory for compiled iPXE binaries. This folder is not tracked by   Git and is created automatically by `build-ipxe.sh`.
 
+
 - `www/html/jammy/`  
-  → Root folder served by your web server (e.g. `/var/www/html/jammy`):
-  - `boot/`: Place Ubuntu kernel (`vmlinuz`) and initrd here manually (see How To      below) 
-  - `iso/`: Place the Ubuntu ISO file here manually  
+   Root folder served by your web server (e.g. `/var/www/html/jammy`):
+  - `boot/`: Place Ubuntu kernel (`vmlinuz`) and initrd here manually (see How To below) 
+  - `iso/`: Place the Ubuntu ISO file here manually
   - `autoinstall/`: Contains cloud-init files for automated install:
     - `user-data` (Adjust to your own client settings)
     - `meta-data` (Leave it empty)
@@ -70,7 +72,7 @@ This setup has been tested on host machines running Ubuntu Desktop 22.04 and Ubu
    ```bash
     sudo ./install.sh
    ```
-   
+ 
 ## 💾 Ubuntu ISO & Boot Files (vmlinuz + initrd)
 
 1. **Download Ubuntu 22.04.5 server ISO**
