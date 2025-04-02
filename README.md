@@ -27,11 +27,11 @@ This setup has been tested on host machines running Ubuntu Desktop 22.04 and Ubu
 - `pxeboot/`  
   → iPXE bootloader files:
   - `config/boot.ipxe`: iPXE boot script  
-  - `firmware/`: Folder for compiled iPXE binaries (ignored in git - run `build-ipxe.sh` to download, compile and move iPXE files to this folder)
+  - `firmware/`: Directory for compiled iPXE binaries. This folder is not tracked by   Git and is created automatically by `build-ipxe.sh`.
 
 - `www/html/jammy/`  
   → Root folder served by your web server (e.g. `/var/www/html/jammy`):
-  - `boot/`: Place Ubuntu kernel (`vmlinuz`) and initrd here manually (see How To below) 
+  - `boot/`: Place Ubuntu kernel (`vmlinuz`) and initrd here manually (see How To      below) 
   - `iso/`: Place the Ubuntu ISO file here manually  
   - `autoinstall/`: Contains cloud-init files for automated install:
     - `user-data` (Adjust to your own client settings)
